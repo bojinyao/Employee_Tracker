@@ -12,13 +12,13 @@ var config = {
   var database = firebase.database();
   $(document).ready(function() {
 
-    $(".submit").on("click", function(event) {
+    $("#submit").on("click", function(event) {
         event.preventDefault();
   
-        name = $(".employee-name").val().trim();
-        role = $(".role").val().trim();
-        date = $("start-date").val().trim();
-        rate = $(".monthly-rate").val().trim();
+        name = $("#employee-name").val().trim();
+        role = $("#role").val().trim();
+        date = $("#start-date").val().trim();
+        rate = $("#monthly-rate").val().trim();
   
         database.ref().push({
           name: name,
