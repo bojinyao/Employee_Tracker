@@ -14,8 +14,16 @@ var config = {
     // 2001-01-29
     let dateList = myDate.split("-");
     let newDate = dateList[1]+"/"+dateList[2]+"/"+dateList[0];
-    return new Date(newDate).getTime();
+    return new Date(newDate);
   }
+
+  function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth() + 1;
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
   
   var database = firebase.database();
   $(document).ready(function() {
@@ -46,6 +54,7 @@ var config = {
         console.log(childSnapshot.val().role);
         console.log(childSnapshot.val().date);
         console.log(childSnapshot.val().rate);
+        console.log(childSnapshot.val().dateAdded);
   
         // $("#name-display").text(childSnapshot.val().name);
         // $("#email-display").text(childSnapshot.val().email);
@@ -53,6 +62,14 @@ var config = {
         // $("#comment-display").text(childSnapshot.val().comment);
   
         // Handle the errors
+
+        let startDate = changeDateToSec(childSnapshot.val().date);
+        let currDate = new Date(childSnapshot.val().dateAdded);
+        
+        let monthDiff = monthDiff(startDate, currDate);
+        console.log(monthDiff);
+
+
       }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
       });
