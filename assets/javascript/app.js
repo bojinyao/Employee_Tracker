@@ -69,7 +69,15 @@ var config = {
         let monthsLapsed = monthDiff(startDate, currDate);
         console.log(monthsLapsed);
 
+        let row = $("<tr>");
+        row.append(`<td>${childSnapshot.val().name}`);
+        row.append(`<td>${childSnapshot.val().role}`);
+        row.append(`<td>${childSnapshot.val().date}`);
+        row.append(`<td>${monthsLapsed}`);
+        row.append(`<td>${childSnapshot.val().rate}`);
+        row.append(`<td>$${monthsLapsed * childSnapshot.val().rate}`);
 
+        $("tbody").append(row);
       }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
       });
