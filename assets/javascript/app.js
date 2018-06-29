@@ -66,8 +66,8 @@ var config = {
         let startDate = changeDateToSec(childSnapshot.val().date);
         let currDate = new Date(childSnapshot.val().dateAdded);
         
-        let monthDiff = monthDiff(startDate, currDate);
-        console.log(monthDiff);
+        let monthsLapsed = monthDiff(startDate, currDate);
+        console.log(monthsLapsed);
 
 
       }, function(errorObject) {
