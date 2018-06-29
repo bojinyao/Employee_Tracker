@@ -15,8 +15,8 @@ var config = {
     $("#submit").on("click", function(event) {
         event.preventDefault();
   
-        name = $("#employee-name").val().trim();
-        role = $("#role").val().trim();
+        name = $("#name-input").val().trim();
+        role = $("#role-input").val().trim();
         date = $("#start-date").val().trim();
         rate = $("#monthly-rate").val().trim();
   
