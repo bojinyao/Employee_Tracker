@@ -9,6 +9,14 @@ var config = {
   firebase.initializeApp(config);
 
 
+  function changeDateToSec(myDate) {
+    // var myDate="26-02-2012";
+    // 2001-01-29
+    let dateList = myDate.split("-");
+    let newDate = dateList[1]+"/"+dateList[2]+"/"+dateList[0];
+    return new Date(newDate).getTime();
+  }
+  
   var database = firebase.database();
   $(document).ready(function() {
 
@@ -24,24 +32,25 @@ var config = {
           name: name,
           role: role,
           date: date,
-          rate: rate
+          rate: rate,
+          dateAdded: firebase.database.ServerValue.TIMESTAMP,
         });
   
       });
     
 
-      database.ref().on("value", function(snapshot) {
+      database.ref().on("child_added", function(childSnapshot) {
 
-        console.log(snapshot.val());
-        console.log(snapshot.val().name);
-        console.log(snapshot.val().role);
-        console.log(snapshot.val().date);
-        console.log(snapshot.val().rate);
+        console.log(childSnapshot.val());
+        console.log(childSnapshot.val().name);
+        console.log(childSnapshot.val().role);
+        console.log(childSnapshot.val().date);
+        console.log(childSnapshot.val().rate);
   
-        // $("#name-display").text(snapshot.val().name);
-        // $("#email-display").text(snapshot.val().email);
-        // $("#age-display").text(snapshot.val().age);
-        // $("#comment-display").text(snapshot.val().comment);
+        // $("#name-display").text(childSnapshot.val().name);
+        // $("#email-display").text(childSnapshot.val().email);
+        // $("#age-display").text(childSnapshot.val().age);
+        // $("#comment-display").text(childSnapshot.val().comment);
   
         // Handle the errors
       }, function(errorObject) {
