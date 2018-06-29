@@ -20,7 +20,7 @@ var config = {
         date = $("start-date").val().trim();
         rate = $(".monthly-rate").val().trim();
   
-        database.ref().set({
+        database.ref().push({
           name: name,
           role: role,
           date: date,
@@ -30,6 +30,23 @@ var config = {
       });
     
 
+      database.ref().on("value", function(snapshot) {
+
+        console.log(snapshot.val());
+        console.log(snapshot.val().name);
+        console.log(snapshot.val().role);
+        console.log(snapshot.val().date);
+        console.log(snapshot.val().rate);
+  
+        // $("#name-display").text(snapshot.val().name);
+        // $("#email-display").text(snapshot.val().email);
+        // $("#age-display").text(snapshot.val().age);
+        // $("#comment-display").text(snapshot.val().comment);
+  
+        // Handle the errors
+      }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+      });
 
 
 
